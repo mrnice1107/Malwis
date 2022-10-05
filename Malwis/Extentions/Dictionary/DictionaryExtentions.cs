@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Net.Http.Headers;
 
 namespace Malwis.Extentions.Dictionary;
+// TODO: Write tests for dictionaries
 public static class DictionaryExtentions
 {
     private static readonly string emptyDictionary = "{}";
@@ -86,6 +87,4 @@ public static class DictionaryExtentions
     /// <param name="keyValue">The key and value to look for and to add if key does not exist.</param>
     /// <returns>A <typeparamref name="TValue"/> either by getting it from the dictionary or if nonexistent, adding it and returing the <paramref name="value"/></returns>
     public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> source, KeyValuePair<TKey, TValue> keyValue) => GetOrAdd(source, keyValue.Key, keyValue.Value);
-
-    // TODO: Write tests for dictionaries
 }
