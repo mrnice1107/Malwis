@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using System.Text;
+using System.Collections.Concurrent;
+using System.Net.Http.Headers;
 
 namespace Malwis.Extentions.Dictionary;
+
+// TODO: Write tests for dictionaries
 public static class DictionaryExtentions
 {
     private static readonly string emptyDictionary = "{}";
@@ -103,6 +107,37 @@ public static class DictionaryExtentions
         return builder.ToString();
     }
 
-    public static bool IsNullOrEmpty(this IDictionary? source) => source is null || source.Count == 0;
-    public static bool IsNullOrEmpty<TKey, TValue>(this IDictionary<TKey, TValue>? source) => source is null || source.Count == 0;
+    public static bool IsNullOrEmpty(this IDictionary source) => source is null || source.Count == 0;
+    public static bool IsNullOrEmpty<TKey, TValue>(this IDictionary<TKey, TValue> source) => source is null || source.Count == 0;
+
+    /// <summary>
+    /// Gets the value using the <paramref name="key"/> or adds the key value pair if the key does not exist.
+    /// </summary>
+    /// <typeparam name="TKey">The key type of the dictionary.</typeparam>
+    /// <typeparam name="TValue">The value type of the dictionary.</typeparam>
+    /// <param name="source">The dictionary to edit.</param>
+    /// <param name="key">The key where the value shoule be.</param>
+    /// <param name="value">The value to add when the key is missing.</param>
+    /// <returns>A <typeparamref name="TValue"/> either by getting it from the dictionary or if nonexistent, adding it and returing the <paramref name="value"/></returns>
+    public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> source, TKey key, TValue value)
+    {
+        if (source.TryGetValue(key, out TValue? result))
+        {
+            return result;
+        }
+
+        source.Add(key, value);
+
+        return value;
+    }
+
+    /// <summary>
+    /// Gets the value using the <paramref name="key"/> or adds the key value pair if the key does not exist.
+    /// </summary>
+    /// <typeparam name="TKey">The key type of the dictionary.</typeparam>
+    /// <typeparam name="TValue">The value type of the dictionary.</typeparam>
+    /// <param name="source">The dictionary to edit.</param>
+    /// <param name="keyValue">The key and value to look for and to add if key does not exist.</param>
+    /// <returns>A <typeparamref name="TValue"/> either by getting it from the dictionary or if nonexistent, adding it and returing the <paramref name="value"/></returns>
+    public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> source, KeyValuePair<TKey, TValue> keyValue) => GetOrAdd(source, keyValue.Key, keyValue.Value);
 }
