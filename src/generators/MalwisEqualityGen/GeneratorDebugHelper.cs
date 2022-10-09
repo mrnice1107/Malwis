@@ -1,18 +1,43 @@
 ﻿#if DEBUG
-using System;
 using System.Diagnostics;
 #endif
 
+using System;
+using System.IO;
+
 namespace EqualityGenerator
 {
-    public sealed class GeneratorDebugHelper
+    public sealed class GeneratorDebugHelper : IDisposable
     {
-#if DEBUG
-        private static string _prefix;
-        private static string _null;
+        /// <summary>
+        /// Only available in DEBUG
+        /// </summary>
+        public GeneratorDebugHelper(DebuggingOutputMode debugMode = DebuggingOutputMode.Debugger, string prefix = "source generator", string nullString = "null")
+        {
+            Counter = 0;
 
-        internal static int Counter { get; private set; }
-        internal static DebuggingOutputMode DebugMode { get; private set; }
+            DebugMode = debugMode;
+            _prefix = prefix;
+            _null = nullString;
+            
+            string path = $"{prefix}_{Guid.NewGuid()}.log";
+
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+
+            //File.Create(path);
+
+            _stream = new StreamWriter(path);
+        }
+        
+        private readonly string _null;
+        private readonly StreamWriter _stream;
+
+        private readonly string _prefix;
+        internal int Counter { get; set; }
+        internal DebuggingOutputMode DebugMode { get; }
 
         /// <summary>
         /// Only available in DEBUG
@@ -20,32 +45,10 @@ namespace EqualityGenerator
         public enum DebuggingOutputMode
         {
             Debugger,
-            /// <summary>
-            /// This is not supported yet...
-            /// </summary>
             File
         }
 
-        /// <summary>
-        /// Only available in DEBUG
-        /// </summary>
-        static GeneratorDebugHelper()
-        {
-            Counter = 0;
-
-            SetupDebugHelper();
-        }
-
-        /// <summary>
-        /// Only available in DEBUG
-        /// </summary>
-        private static void SetupDebugHelper(DebuggingOutputMode debugMode = DebuggingOutputMode.Debugger, string prefix = "generator: ", string nullString = "null")
-        {
-            DebugMode = debugMode;
-            _prefix = prefix;
-            _null = nullString;
-        }
-
+#if DEBUG
         /// <summary>
         /// Only available in DEBUG
         /// </summary>
@@ -57,21 +60,21 @@ namespace EqualityGenerator
             }
         }
 
-        private static void DoCount()
+        private void DoCount()
         {
             DebugLine($"DebugCount: {Counter}", false);
             Counter++;
         }
 
-        internal static void DebugLine(bool doCount = false) => DebugLine("", doCount);
-        internal static void DebugLine(object message, bool doCount = false) => DebugLine(message is null ? "null" : message.ToString(), doCount);
-        internal static void DebugLine(string message, bool doCount = false)
+        internal void DebugLine(bool doCount = false) => DebugLine("", doCount);
+        internal void DebugLine(object message, bool doCount = false) => DebugLine(message is null ? "null" : message.ToString(), doCount);
+        internal void DebugLine(string message, bool doCount = false)
         {
             if (doCount)
             {
                 DoCount();
             }
-            string msg = $"{_prefix}{message ?? _null}";
+            string msg = $"{_prefix} : {message ?? _null}";
 
             switch (DebugMode)
             {
@@ -79,21 +82,29 @@ namespace EqualityGenerator
                     Debug.WriteLine(msg);
                     break;
                 case DebuggingOutputMode.File:
+                    _stream.WriteLine(msg);
+                    break;
                 default:
                     throw new Exception($"The {nameof(DebuggingOutputMode)} {DebugMode} is currently not supported.");
             }
         }
 
-        internal static void DebugLine(object message, string heading, bool doCount = false)
+        internal void DebugLine(object message, string heading, bool doCount = false)
         {
             DebugHeader(heading, true, doCount);
             DebugLine(message, false);
             DebugHeader(heading, false, false);
         }
-        internal static void DebugHeader(object heading, bool isHeadingStart, bool doCount = false) => DebugLine($"--- {heading} {(isHeadingStart ? "start" : "end")} ---", doCount);
+        
+        private void DebugHeader(object heading, bool isHeadingStart, bool doCount = false) => DebugLine($"--- {heading} {(isHeadingStart ? "start" : "end")} ---", doCount);
 
 #else
     internal static void DebugLine(params object[] args) { }
 #endif
+        public void Dispose() => _stream?.Dispose();
+
+        ~GeneratorDebugHelper() => Dispose();
     }
+    
+    
 }
