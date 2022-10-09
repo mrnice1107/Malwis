@@ -5,10 +5,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Malwis\Malwis.csproj" />
+    <ProjectReference Include="..\..\src\Malwis\Malwis.csproj" />
   </ItemGroup>
 
 </Project>
