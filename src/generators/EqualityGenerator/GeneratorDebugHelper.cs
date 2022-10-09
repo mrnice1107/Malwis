@@ -109,7 +109,6 @@ namespace EqualityGenerator
             }
 
             File.WriteAllLines(_path, _lines);
-            throw new Exception($"p: {_path}, lines: {_lines.Count}");
         }
     }
     

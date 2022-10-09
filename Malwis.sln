@@ -19,11 +19,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generators", "generators", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generators", "generators", "{CDA5A370-E291-43BF-B7DE-FE77C7A87104}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EqualityGenTest", "test\generators\EqualityGenTest\EqualityGenTest.csproj", "{EBED953C-77F3-437A-9EDD-A7DBA955DB90}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B891AD92-5572-493D-A177-B35B395FD777}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EqualityGenerator", "src\generators\MalwisEqualityGen\EqualityGenerator.csproj", "{54992844-1B5A-4379-8684-7A1C95D64F7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EqualityGeneratorAttributes", "src\generators\EqualityGeneratorAttributes\EqualityGeneratorAttributes.csproj", "{BFEB0635-345C-4C14-96E6-92BE39140519}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EqualityGeneratorAttributes", "src\generators\EqualityGeneratorAttributes\EqualityGeneratorAttributes.csproj", "{D0D1653F-1FC7-441E-8088-C6F92679A3F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EqualityGenTest", "test\generators\EqualityGenTest\EqualityGenTest.csproj", "{C667539B-40F4-4051-8984-5F5BF5613AA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EqualityGenerator", "src\generators\EqualityGenerator\EqualityGenerator.csproj", "{73C9A5A8-2560-409A-B6A8-48B86BCA80AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,18 +53,18 @@ Global
 		{FF2D9515-6768-4A4C-BA97-6F9639E43381}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF2D9515-6768-4A4C-BA97-6F9639E43381}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF2D9515-6768-4A4C-BA97-6F9639E43381}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0D1653F-1FC7-441E-8088-C6F92679A3F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0D1653F-1FC7-441E-8088-C6F92679A3F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0D1653F-1FC7-441E-8088-C6F92679A3F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0D1653F-1FC7-441E-8088-C6F92679A3F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFEB0635-345C-4C14-96E6-92BE39140519}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFEB0635-345C-4C14-96E6-92BE39140519}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFEB0635-345C-4C14-96E6-92BE39140519}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFEB0635-345C-4C14-96E6-92BE39140519}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C667539B-40F4-4051-8984-5F5BF5613AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C667539B-40F4-4051-8984-5F5BF5613AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C667539B-40F4-4051-8984-5F5BF5613AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C667539B-40F4-4051-8984-5F5BF5613AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73C9A5A8-2560-409A-B6A8-48B86BCA80AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73C9A5A8-2560-409A-B6A8-48B86BCA80AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73C9A5A8-2560-409A-B6A8-48B86BCA80AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73C9A5A8-2560-409A-B6A8-48B86BCA80AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,9 +76,9 @@ Global
 		{FF2D9515-6768-4A4C-BA97-6F9639E43381} = {71EE04A2-98E2-4CFE-B7DE-03A30E730394}
 		{556B74B7-C5CC-471F-BE31-025981F15E52} = {12A5E9BA-DF9D-4EE4-84F7-3E51D5EB92CD}
 		{CDA5A370-E291-43BF-B7DE-FE77C7A87104} = {71EE04A2-98E2-4CFE-B7DE-03A30E730394}
-		{EBED953C-77F3-437A-9EDD-A7DBA955DB90} = {CDA5A370-E291-43BF-B7DE-FE77C7A87104}
-		{54992844-1B5A-4379-8684-7A1C95D64F7C} = {556B74B7-C5CC-471F-BE31-025981F15E52}
-		{D0D1653F-1FC7-441E-8088-C6F92679A3F8} = {556B74B7-C5CC-471F-BE31-025981F15E52}
+		{BFEB0635-345C-4C14-96E6-92BE39140519} = {556B74B7-C5CC-471F-BE31-025981F15E52}
+		{C667539B-40F4-4051-8984-5F5BF5613AA9} = {CDA5A370-E291-43BF-B7DE-FE77C7A87104}
+		{73C9A5A8-2560-409A-B6A8-48B86BCA80AD} = {556B74B7-C5CC-471F-BE31-025981F15E52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E752BB2D-5545-4F2B-BE59-7E18B73BD422}

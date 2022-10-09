@@ -2,16 +2,18 @@
 
 namespace EqualityGenTest;
 
-[Equality]
-public class Person
+[AutoEquality]
+public partial class Person
 {
     public Person(string firstName, string lastName, int age)
     {
         FirstName = firstName;
         LastName = lastName;
         Age = age;
-        
+
         PersonId = Guid.NewGuid();
+
+        Print(firstName);
     }
 
     public string FirstName { get; }
@@ -20,5 +22,4 @@ public class Person
     
     [EqualityIgnore]
     public Guid PersonId { get; }
-    
 }

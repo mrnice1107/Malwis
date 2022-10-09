@@ -3,8 +3,7 @@
 namespace EqualityGeneratorAttributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class EqualityAttribute : Attribute
+    public class AutoEqualityAttribute : Attribute
     {
-
     }
 }
