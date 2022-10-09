@@ -3,16 +3,17 @@ using System.Diagnostics;
 #endif
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace EqualityGenerator
 {
-    public sealed class GeneratorDebugHelper : IDisposable
+    internal sealed class GeneratorDebugHelper
     {
         /// <summary>
         /// Only available in DEBUG
         /// </summary>
-        public GeneratorDebugHelper(DebuggingOutputMode debugMode = DebuggingOutputMode.Debugger, string prefix = "source generator", string nullString = "null")
+        internal GeneratorDebugHelper(string outDir, DebuggingOutputMode debugMode = DebuggingOutputMode.Debugger, string prefix = "source generator", string nullString = "null")
         {
             Counter = 0;
 
@@ -20,20 +21,13 @@ namespace EqualityGenerator
             _prefix = prefix;
             _null = nullString;
             
-            string path = $"{prefix}_{Guid.NewGuid()}.log";
-
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-
-            //File.Create(path);
-
-            _stream = new StreamWriter(path);
+            _path = Path.Combine(outDir, $"{prefix}_{Guid.NewGuid()}.log");
+            _lines = new List<string>();
         }
         
+        private readonly string _path;
         private readonly string _null;
-        private readonly StreamWriter _stream;
+        private readonly List<string> _lines;
 
         private readonly string _prefix;
         internal int Counter { get; set; }
@@ -42,7 +36,7 @@ namespace EqualityGenerator
         /// <summary>
         /// Only available in DEBUG
         /// </summary>
-        public enum DebuggingOutputMode
+        internal enum DebuggingOutputMode
         {
             Debugger,
             File
@@ -52,7 +46,7 @@ namespace EqualityGenerator
         /// <summary>
         /// Only available in DEBUG
         /// </summary>
-        public static void AttachDebugger()
+        internal static void AttachDebugger()
         {
             if (!Debugger.IsAttached)
             {
@@ -82,7 +76,7 @@ namespace EqualityGenerator
                     Debug.WriteLine(msg);
                     break;
                 case DebuggingOutputMode.File:
-                    _stream.WriteLine(msg);
+                    _lines.Add(msg);
                     break;
                 default:
                     throw new Exception($"The {nameof(DebuggingOutputMode)} {DebugMode} is currently not supported.");
@@ -99,11 +93,24 @@ namespace EqualityGenerator
         private void DebugHeader(object heading, bool isHeadingStart, bool doCount = false) => DebugLine($"--- {heading} {(isHeadingStart ? "start" : "end")} ---", doCount);
 
 #else
-    internal static void DebugLine(params object[] args) { }
+    internal void DebugLine(params object[] args) { }
 #endif
-        public void Dispose() => _stream?.Dispose();
 
-        ~GeneratorDebugHelper() => Dispose();
+        internal void Save()
+        {
+            if (DebugMode != DebuggingOutputMode.File)
+            {
+                return;
+            }
+
+            if (File.Exists(_path))
+            {
+                File.Delete(_path);
+            }
+
+            File.WriteAllLines(_path, _lines);
+            throw new Exception($"p: {_path}, lines: {_lines.Count}");
+        }
     }
     
     

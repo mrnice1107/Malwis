@@ -8,13 +8,14 @@ namespace EqualityGenerator
     [Generator]
     public class EqualityGenerator : ISourceGenerator
     {
-        internal static readonly GeneratorDebugHelper Debugger;
+        private readonly GeneratorDebugHelper _debugger;
 
-        static EqualityGenerator()
+        public EqualityGenerator()
         {
-            Debugger = new GeneratorDebugHelper(debugMode: GeneratorDebugHelper.DebuggingOutputMode.File);
+            //GeneratorDebugHelper.AttachDebugger();
+            _debugger = new GeneratorDebugHelper(@"E:\Projects\github\Malwis\test\generators\EqualityGenTest\", debugMode: GeneratorDebugHelper.DebuggingOutputMode.File);
         }
-        
+
         public void Execute(GeneratorExecutionContext context)
         {
 
@@ -22,6 +23,7 @@ namespace EqualityGenerator
             
             
             
+            _debugger.Save();
         }
 
         public void Initialize(GeneratorInitializationContext context)
@@ -29,14 +31,14 @@ namespace EqualityGenerator
 
             // init :D
 
-            context.RegisterForSyntaxNotifications(() => new EqualitySyntaxReceiver(Debugger));
-            
+            context.RegisterForSyntaxNotifications(() => new EqualitySyntaxReceiver(_debugger));
         }
     }
 
     internal class EqualitySyntaxReceiver : ISyntaxReceiver
     {
         private static readonly string EqualityAttributeName = nameof(EqualityAttribute);
+        private static readonly string EqualityAttributeNameShort = EqualityAttributeName.Replace("Attribute", "");
         private readonly GeneratorDebugHelper _debugger;
 
         public EqualitySyntaxReceiver(GeneratorDebugHelper debugger) => _debugger = debugger;
@@ -51,7 +53,7 @@ namespace EqualityGenerator
             bool hasEqualityAttribute = HasEqualityAttribute(classNode);
 
             _debugger.DebugLine(classNode);
-            _debugger.DebugLine(hasEqualityAttribute);
+            _debugger.DebugLine(hasEqualityAttribute.ToString());
         }
 
         private static bool HasEqualityAttribute(ClassDeclarationSyntax classNode)
@@ -87,7 +89,7 @@ namespace EqualityGenerator
 
         private static bool AttributeIsEqualityAttribute(AttributeSyntax attribute) =>
             attribute.Name is IdentifierNameSyntax nameSyntax &&
-            nameSyntax.Identifier.Text.Equals(EqualityAttributeName);
+            (nameSyntax.Identifier.Text.Equals(EqualityAttributeName) || nameSyntax.Identifier.Text.Equals(EqualityAttributeNameShort));
     }
     
 }

@@ -3,64 +3,65 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Malwis", "src\Malwis\Malwis.csproj", "{3BD68960-16F2-4F3D-A858-DF8E097FDF8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Malwis", "src\Malwis\Malwis.csproj", "{3BD68960-16F2-4F3D-A858-DF8E097FDF8D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{12A5E9BA-DF9D-4EE4-84F7-3E51D5EB92CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{71EE04A2-98E2-4CFE-B7DE-03A30E730394}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MalwisBenchmarking", "test\MalwisBenchmarking\MalwisBenchmarking.csproj", "{F1802AC1-A745-4C93-B9D5-D3D53A193754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MalwisBenchmarking", "test\MalwisBenchmarking\MalwisBenchmarking.csproj", "{F1802AC1-A745-4C93-B9D5-D3D53A193754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MalwisConsole", "test\MalwisConsole\MalwisConsole.csproj", "{75DEC78D-A14C-4323-BCF5-4CEFA543CBB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MalwisConsole", "test\MalwisConsole\MalwisConsole.csproj", "{75DEC78D-A14C-4323-BCF5-4CEFA543CBB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MalwisTest", "test\MalwisTest\MalwisTest.csproj", "{FF2D9515-6768-4A4C-BA97-6F9639E43381}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MalwisTest", "test\MalwisTest\MalwisTest.csproj", "{FF2D9515-6768-4A4C-BA97-6F9639E43381}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generators", "generators", "{556B74B7-C5CC-471F-BE31-025981F15E52}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generators", "generators", "{CDA5A370-E291-43BF-B7DE-FE77C7A87104}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EqualityGenTest", "test\generators\EqualityGenTest\EqualityGenTest.csproj", "{EBED953C-77F3-437A-9EDD-A7DBA955DB90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EqualityGenTest", "test\generators\EqualityGenTest\EqualityGenTest.csproj", "{EBED953C-77F3-437A-9EDD-A7DBA955DB90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EqualityGenerator", "src\generators\MalwisEqualityGen\EqualityGenerator.csproj", "{54992844-1B5A-4379-8684-7A1C95D64F7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EqualityGenerator", "src\generators\MalwisEqualityGen\EqualityGenerator.csproj", "{54992844-1B5A-4379-8684-7A1C95D64F7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EqualityGeneratorAttributes", "src\generators\EqualityGeneratorAttributes\EqualityGeneratorAttributes.csproj", "{D0D1653F-1FC7-441E-8088-C6F92679A3F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EqualityGeneratorAttributes", "src\generators\EqualityGeneratorAttributes\EqualityGeneratorAttributes.csproj", "{D0D1653F-1FC7-441E-8088-C6F92679A3F8}"
 EndProject
 Global
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E752BB2D-5545-4F2B-BE59-7E18B73BD422}
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3BD68960-16F2-4F3D-A858-DF8E097FDF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3BD68960-16F2-4F3D-A858-DF8E097FDF8D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3BD68960-16F2-4F3D-A858-DF8E097FDF8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3BD68960-16F2-4F3D-A858-DF8E097FDF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1802AC1-A745-4C93-B9D5-D3D53A193754}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1802AC1-A745-4C93-B9D5-D3D53A193754}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BD68960-16F2-4F3D-A858-DF8E097FDF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BD68960-16F2-4F3D-A858-DF8E097FDF8D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1802AC1-A745-4C93-B9D5-D3D53A193754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1802AC1-A745-4C93-B9D5-D3D53A193754}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75DEC78D-A14C-4323-BCF5-4CEFA543CBB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75DEC78D-A14C-4323-BCF5-4CEFA543CBB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1802AC1-A745-4C93-B9D5-D3D53A193754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1802AC1-A745-4C93-B9D5-D3D53A193754}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75DEC78D-A14C-4323-BCF5-4CEFA543CBB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75DEC78D-A14C-4323-BCF5-4CEFA543CBB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF2D9515-6768-4A4C-BA97-6F9639E43381}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF2D9515-6768-4A4C-BA97-6F9639E43381}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75DEC78D-A14C-4323-BCF5-4CEFA543CBB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75DEC78D-A14C-4323-BCF5-4CEFA543CBB2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF2D9515-6768-4A4C-BA97-6F9639E43381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF2D9515-6768-4A4C-BA97-6F9639E43381}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0D1653F-1FC7-441E-8088-C6F92679A3F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0D1653F-1FC7-441E-8088-C6F92679A3F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF2D9515-6768-4A4C-BA97-6F9639E43381}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF2D9515-6768-4A4C-BA97-6F9639E43381}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBED953C-77F3-437A-9EDD-A7DBA955DB90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54992844-1B5A-4379-8684-7A1C95D64F7C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D0D1653F-1FC7-441E-8088-C6F92679A3F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D0D1653F-1FC7-441E-8088-C6F92679A3F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0D1653F-1FC7-441E-8088-C6F92679A3F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0D1653F-1FC7-441E-8088-C6F92679A3F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3BD68960-16F2-4F3D-A858-DF8E097FDF8D} = {12A5E9BA-DF9D-4EE4-84F7-3E51D5EB92CD}
@@ -73,8 +74,7 @@ Global
 		{54992844-1B5A-4379-8684-7A1C95D64F7C} = {556B74B7-C5CC-471F-BE31-025981F15E52}
 		{D0D1653F-1FC7-441E-8088-C6F92679A3F8} = {556B74B7-C5CC-471F-BE31-025981F15E52}
 	EndGlobalSection
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Release|Any CPU = Release|Any CPU
-		Debug|Any CPU = Debug|Any CPU
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E752BB2D-5545-4F2B-BE59-7E18B73BD422}
 	EndGlobalSection
 EndGlobal
