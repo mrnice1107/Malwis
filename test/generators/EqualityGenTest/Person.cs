@@ -12,13 +12,21 @@ public partial class Person
         Age = age;
 
         PersonId = Guid.NewGuid();
-
-        Print(firstName);
     }
 
+    private void SomeMethod()
+    {
+        void DoSomething<T>(T t) {}
+        
+        DoSomething(PersonId);
+        DoSomething(FirstName);
+        DoSomething(LastName);
+        DoSomething(Age);
+    }
+    
     public string FirstName { get; }
     public string LastName { get; }
-    public int Age { get; }
+    private int Age { get; set; }
     
     [EqualityIgnore]
     public Guid PersonId { get; }

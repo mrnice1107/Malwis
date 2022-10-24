@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using EqualityGenerator.Extensions;
-using EqualityGeneratorAttributes;
+using EqualityGenerator.Factories;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -34,29 +31,47 @@ namespace EqualityGenerator
 
         public void Execute(GeneratorExecutionContext context)
         {
+
+            //GeneratorDebugHelper.AttachDebugger();
+            
             _debugger.DebugLine("Starting Processing", "Executing");
 
-            ISyntaxReceiver contextSyntaxReceiver = context.SyntaxReceiver;
-            if (!(contextSyntaxReceiver is EqualitySyntaxReceiver equalityReceiver))
+#if DEBUG
+            try
             {
-                return;
-            }
+#endif
+                ISyntaxReceiver contextSyntaxReceiver = context.SyntaxReceiver;
+                if (!(contextSyntaxReceiver is EqualitySyntaxReceiver equalityReceiver))
+                {
+                    return;
+                }
 
-            foreach (ClassDeclarationSyntax equalityClass in equalityReceiver.EqualityClasses)
+                foreach (ClassDeclarationSyntax equalityClass in equalityReceiver.EqualityClasses)
+                {
+                    SourceText generatedEqualityExtension = EqualsFactory.GenerateEqualsSourceCode(equalityClass);
+                    string fileName = $"{equalityClass.Identifier.Text}_auto_equality.g.cs";
+
+                    context.AddSource(fileName, generatedEqualityExtension);
+                    _debugger.DebugLine(generatedEqualityExtension.ToString(), $"Generated Source: {fileName}");
+                }
+
+                _debugger.DebugLine("Processing Finished", "Executing");
+#if DEBUG
+            }
+            catch (Exception e)
             {
-                SourceText generatedEqualityExtension = GenerateEqualityExtension(equalityClass);
-                string fileName = $"{equalityClass.Identifier.Text}_auto_equality.g.cs";
-
-                context.AddSource(fileName, generatedEqualityExtension);
-                _debugger.DebugLine(generatedEqualityExtension.ToString(), $"Generated Source: {fileName}");
+                _debugger.DebugLine(e.Message);
+                throw;
             }
-
-            _debugger.DebugLine("Processing Finished", "Executing");
-            _debugger.Save();
+            finally
+            {
+                _debugger.Save();
+            }
+#endif
         }
 
         public void Initialize(GeneratorInitializationContext context)
-        {
+        { 
             _debugger.DebugLine("Initializing");
             
             context.RegisterForSyntaxNotifications(() => new EqualitySyntaxReceiver(_debugger));
@@ -64,39 +79,7 @@ namespace EqualityGenerator
             _debugger.DebugLine("Done Initializing");
         }
         
-        private static SourceText GenerateEqualityExtension(TypeDeclarationSyntax equalityClass)
-        {
-            FileScopedNamespaceDeclarationSyntax namespaceSyntax = equalityClass.GetParentOfType<FileScopedNamespaceDeclarationSyntax>();
-
-            StringBuilder builder = new StringBuilder();
-            List<PropertyDeclarationSyntax> equalityProperties = GetEqualityProperties(equalityClass);
-            
-            CompilationUnitSyntax classExtension = CompilationUnit()
-                .WithMembers(
-                    SingletonList<MemberDeclarationSyntax>(
-                        namespaceSyntax
-                            .WithNamespaceKeyword(
-                            Token(
-                                TriviaList(Comment("// <generated-code/>")),
-                                SyntaxKind.NamespaceKeyword,
-                                TriviaList()
-                            ))
-                            .WithMembers(
-                                // class stuff here
-                                SingletonList<MemberDeclarationSyntax>(
-                                    ClassDeclaration(equalityClass.Identifier.Text)
-                                        .WithModifiers(
-                                            equalityClass.Modifiers
-                                            )
-                                        .WithMembers(
-                                            SingletonList<MemberDeclarationSyntax>(
-                                                TempCreateMethod(builder.ToString())
-                                                )
-                                        ))
-                                )))
-                .NormalizeWhitespace();
-            return classExtension.GetText(Encoding.UTF8);
-        }
+        
 
         private static MethodDeclarationSyntax TempCreateMethod(string comment)
         {
@@ -120,28 +103,20 @@ namespace EqualityGenerator
                         .WithCloseBraceToken(
                             Token(
                                 TriviaList(
-                                    Comment($"// {comment}")),
+                                    Comment($"/*\n{comment}\n*/")),
                                 SyntaxKind.CloseBraceToken,
                                 TriviaList())));
         }
-
-        private static List<PropertyDeclarationSyntax> GetEqualityProperties(TypeDeclarationSyntax equalityClass)
-        {
-            List<PropertyDeclarationSyntax> list = new List<PropertyDeclarationSyntax>();
-            
-            foreach (MemberDeclarationSyntax member in equalityClass.Members)
-            {
-                if (MemberIsPropertyWithoutIgnoreAttribute(member))
-                {
-                    list.Add(member as PropertyDeclarationSyntax);
-                }
-            }
-
-            return list;
-        }
-
-        private static bool MemberIsPropertyWithoutIgnoreAttribute(MemberDeclarationSyntax member) =>
-            member is PropertyDeclarationSyntax &&
-            !member.HasAttribute(nameof(EqualityIgnoreAttribute), nameof(EqualityIgnoreAttribute).Replace("Attribute",""));
     }
 }
+
+/*
+    public static bool operator ==([AllowNull] EqualityPerson left, [AllowNull] object right) => left is not null && left.Equals(right);
+    public static bool operator !=([AllowNull] EqualityPerson left, [AllowNull] object right) => !(left == right);
+
+    public static bool operator ==([AllowNull] EqualityPerson left, [AllowNull] EqualityPerson right) => left is not null && left.Equals(right);
+    public static bool operator !=([AllowNull] EqualityPerson left, [AllowNull] EqualityPerson right) => !(left == right);
+    
+    public bool Equals([AllowNull] Test other) => other is not null && FirstName == other.FirstName && LastName == other.LastName && Age == other.Age;
+    public override bool Equals([AllowNull] object obj) => obj is Test casted && Equals(casted);
+*/
