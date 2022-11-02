@@ -1,11 +1,8 @@
 ﻿using System;
 using EqualityGenerator.Factories;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
-
-using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace EqualityGenerator
 {
@@ -17,7 +14,6 @@ namespace EqualityGenerator
 
         public EqualityGenerator()
         {
-            //GeneratorDebugHelper.AttachDebugger();
             _debugger = new GeneratorDebugHelper(LocalDir, debugMode: GeneratorDebugHelper.DebuggingOutputMode.File);
 
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
@@ -32,8 +28,6 @@ namespace EqualityGenerator
         public void Execute(GeneratorExecutionContext context)
         {
 
-            //GeneratorDebugHelper.AttachDebugger();
-            
             _debugger.DebugLine("Starting Processing", "Executing");
 
 #if DEBUG
@@ -78,45 +72,5 @@ namespace EqualityGenerator
             
             _debugger.DebugLine("Done Initializing");
         }
-        
-        
-
-        private static MethodDeclarationSyntax TempCreateMethod(string comment)
-        {
-            return MethodDeclaration(
-                    PredefinedType(
-                        Token(SyntaxKind.VoidKeyword)),
-                    Identifier("Print"))
-                .WithModifiers(
-                    TokenList(
-                        Token(SyntaxKind.PrivateKeyword)))
-                .WithParameterList(
-                    ParameterList(
-                        SingletonSeparatedList(
-                            Parameter(
-                                    Identifier("input"))
-                                .WithType(
-                                    PredefinedType(
-                                        Token(SyntaxKind.StringKeyword))))))
-                .WithBody(
-                    Block()
-                        .WithCloseBraceToken(
-                            Token(
-                                TriviaList(
-                                    Comment($"/*\n{comment}\n*/")),
-                                SyntaxKind.CloseBraceToken,
-                                TriviaList())));
-        }
     }
 }
-
-/*
-    public static bool operator ==([AllowNull] EqualityPerson left, [AllowNull] object right) => left is not null && left.Equals(right);
-    public static bool operator !=([AllowNull] EqualityPerson left, [AllowNull] object right) => !(left == right);
-
-    public static bool operator ==([AllowNull] EqualityPerson left, [AllowNull] EqualityPerson right) => left is not null && left.Equals(right);
-    public static bool operator !=([AllowNull] EqualityPerson left, [AllowNull] EqualityPerson right) => !(left == right);
-    
-    public bool Equals([AllowNull] Test other) => other is not null && FirstName == other.FirstName && LastName == other.LastName && Age == other.Age;
-    public override bool Equals([AllowNull] object obj) => obj is Test casted && Equals(casted);
-*/

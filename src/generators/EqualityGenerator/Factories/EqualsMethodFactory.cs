@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
@@ -30,9 +29,7 @@ namespace EqualityGenerator.Factories
         private static readonly ParameterListSyntax ParametersToObject;
         
         internal static MemberDeclarationSyntax GenerateEqualsObjMethod(BaseTypeDeclarationSyntax equalityClassIdentifier) =>
-            MethodDeclaration(
-                    EqualsFactory.BooleanType,
-                    EqualsFactory.EqualsMethodName.Identifier)
+            MethodDeclaration(EqualsFactory.BooleanType, EqualsFactory.EqualsMethodName.Identifier)
                 .WithModifiers(EqualsFactory.PublicOverrideModifier)
                 .WithParameterList(ParametersToObject)
                 .WithExpressionBody(

@@ -12,6 +12,7 @@ public partial class Person
         Age = age;
 
         PersonId = Guid.NewGuid();
+        Field = "yaix";
     }
 
     private void SomeMethod()
@@ -23,6 +24,8 @@ public partial class Person
         DoSomething(LastName);
         DoSomething(Age);
     }
+    
+    public string Field;
     
     public string FirstName { get; }
     public string LastName { get; }
