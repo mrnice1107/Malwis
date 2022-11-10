@@ -117,7 +117,7 @@ public static class DictionaryExtensions
     /// <param name="source">The dictionary to edit.</param>
     /// <param name="key">The key where the value shoule be.</param>
     /// <param name="value">The value to add when the key is missing.</param>
-    /// <returns>A <typeparamref name="TValue"/> either by getting it from the dictionary or if nonexistent, adding it and returing the <paramref name="value"/></returns>
+    /// <returns>A <typeparamref name="TValue"/> either by getting it from the dictionary or if nonexistent, adding it and returning the <paramref name="value"/></returns>
     public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> source, TKey key, TValue value)
     {
         if (source.TryGetValue(key, out TValue? result))
@@ -131,12 +131,12 @@ public static class DictionaryExtensions
     }
 
     /// <summary>
-    /// Gets the value using the <paramref name="key"/> or adds the key value pair if the key does not exist.
+    /// Gets the value using the Key of <paramref name="keyValue"/> or adds the key value pair if the key does not exist.
     /// </summary>
     /// <typeparam name="TKey">The key type of the dictionary.</typeparam>
     /// <typeparam name="TValue">The value type of the dictionary.</typeparam>
     /// <param name="source">The dictionary to edit.</param>
     /// <param name="keyValue">The key and value to look for and to add if key does not exist.</param>
-    /// <returns>A <typeparamref name="TValue"/> either by getting it from the dictionary or if nonexistent, adding it and returing the <paramref name="value"/></returns>
+    /// <returns>A <typeparamref name="TValue"/> either by getting it from the dictionary or if nonexistent, adding it and returning the <paramref name="value"/></returns>
     public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> source, KeyValuePair<TKey, TValue> keyValue) => GetOrAdd(source, keyValue.Key, keyValue.Value);
 }
