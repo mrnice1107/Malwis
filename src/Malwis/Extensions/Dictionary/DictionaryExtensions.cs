@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Text;
-using System.Collections.Concurrent;
-using System.Net.Http.Headers;
+using Malwis.Extensions.Numbers;
 
-namespace Malwis.Extentions.Dictionary;
+namespace Malwis.Extensions.Dictionary;
 
 // TODO: Write tests for dictionaries
-public static class DictionaryExtentions
+public static class DictionaryExtensions
 {
-    private static readonly string emptyDictionary = "{}";
+    private const string EmptyDictionary = "{}";
 
     public static IDictionary<TValue, TKey> Reverse<TKey, TValue>(this IDictionary<TKey, TValue> source) where TKey : notnull where TValue : notnull
     {
@@ -26,11 +25,9 @@ public static class DictionaryExtentions
     {
         Dictionary<TValue, ICollection<TKey>> result = new();
 
-        foreach (KeyValuePair<TKey, IEnumerable<TValue>> entry in source)
+        foreach ((TKey? value, IEnumerable<TValue>? enumerable) in source)
         {
-            TKey value = entry.Key;
-
-            foreach (TValue key in entry.Value)
+            foreach (TValue key in enumerable)
             {
                 if (!result.ContainsKey(key))
                 {
@@ -48,7 +45,7 @@ public static class DictionaryExtentions
     {
         if (source.IsNullOrEmpty())
         {
-            return emptyDictionary;
+            return EmptyDictionary;
         }
 
         const string nullStr = "NULL";
@@ -65,15 +62,14 @@ public static class DictionaryExtentions
             builder.Append(whiteSpace);
         }
 
-        IEnumerator<KeyValuePair<TKey, TValue>> enumerator = source!.GetEnumerator();
+        using IEnumerator<KeyValuePair<TKey, TValue>> enumerator = source!.GetEnumerator();
         for (int i = 0; enumerator.MoveNext(); i++)
         {
             KeyValuePair<TKey, TValue> pair = enumerator.Current;
 
             builder.Append(
                 pair.Key is null ? nullStr :
-                pair.Key is string str ? $"\"{pair.Value}\"" :
-                pair.Key is IDictionary<object, object> keyDict ? keyDict.ToFancyString() :
+                pair.Key is string || pair.Key.IsFloatingPointNumeric() ? $"\"{pair.Key}\"" :
                 pair.Key.ToString()
                 );
 
@@ -83,7 +79,7 @@ public static class DictionaryExtentions
 
             builder.Append(
                 pair.Value is null ? nullStr :
-                pair.Value is string ? $"\"{pair.Value}\"" :
+                pair.Value is string || pair.Value.IsFloatingPointNumeric() ? $"\"{pair.Value}\"" :
                 pair.Value is IDictionary<object, object> valueDict ? valueDict.ToFancyString() :
                 pair.Value.ToString()
                 );
@@ -107,8 +103,11 @@ public static class DictionaryExtentions
         return builder.ToString();
     }
 
-    public static bool IsNullOrEmpty(this IDictionary source) => source is null || source.Count == 0;
-    public static bool IsNullOrEmpty<TKey, TValue>(this IDictionary<TKey, TValue> source) => source is null || source.Count == 0;
+    public static bool IsNullOrEmpty(this IDictionary? source) => source is null || source.Count == 0;
+    public static bool IsNullOrEmpty<TKey, TValue>(this IDictionary<TKey, TValue>? source) => source is null || source.Count == 0;
+
+    public static bool DictionaryIsNullOrEmpty(IDictionary source) => source is null || source.Count == 0;
+    public static bool DictionaryIsNullOrEmpty<TKey, TValue>(IDictionary<TKey, TValue> source) => source is null || source.Count == 0;
 
     /// <summary>
     /// Gets the value using the <paramref name="key"/> or adds the key value pair if the key does not exist.
