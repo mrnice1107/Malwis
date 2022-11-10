@@ -103,11 +103,11 @@ public static class DictionaryExtensions
         return builder.ToString();
     }
 
-    public static bool IsNullOrEmpty(this IDictionary? source) => source is null || source.Count == 0;
-    public static bool IsNullOrEmpty<TKey, TValue>(this IDictionary<TKey, TValue>? source) => source is null || source.Count == 0;
-
-    public static bool DictionaryIsNullOrEmpty(IDictionary source) => source is null || source.Count == 0;
-    public static bool DictionaryIsNullOrEmpty<TKey, TValue>(IDictionary<TKey, TValue> source) => source is null || source.Count == 0;
+    public static bool IsNullOrEmpty(this IDictionary? source) => DictionaryIsNullOrEmpty(source);
+    public static bool IsNullOrEmpty<TKey, TValue>(this IDictionary<TKey, TValue>? source) => DictionaryIsNullOrEmpty(source);
+    
+    public static bool DictionaryIsNullOrEmpty(IDictionary? source) => source is null || source.Count == 0;
+    public static bool DictionaryIsNullOrEmpty<TKey, TValue>(IDictionary<TKey, TValue>? source) => source is null || source.Count == 0;
 
     /// <summary>
     /// Gets the value using the <paramref name="key"/> or adds the key value pair if the key does not exist.
