@@ -54,7 +54,7 @@ namespace MalwisStandard2.Extensions
                     KeyValuePair<TKey, TValue> pair = enumerator.Current;
 
                     builder.Append(
-                        pair.Key is null ? nullStr :
+                        pair.Key == null ? nullStr :
                         pair.Key is string strKey ? $"\"{strKey}\"" :
                         pair.Key.ToString()
                     );
@@ -63,7 +63,7 @@ namespace MalwisStandard2.Extensions
                     builder.Append(whiteSpace);
 
                     builder.Append(
-                        pair.Value is null ? nullStr :
+                        pair.Value == null ? nullStr :
                         pair.Value is string strValue ? $"\"{strValue}\"" :
                         pair.Value is IDictionary<object, object> valueDict ? valueDict.ToFancyString() :
                         pair.Value.ToString()
