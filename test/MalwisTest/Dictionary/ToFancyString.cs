@@ -1,9 +1,9 @@
 ﻿using Malwis.Extensions.Dictionary;
 
-namespace MalwisTest;
+namespace MalwisTest.Dictionary;
 
 [UsesVerify]
-public class DictionaryTests
+public class ToFancyString
 {
     private static readonly Dictionary<object, object> TestDict = new()
     {
@@ -40,6 +40,14 @@ public class DictionaryTests
     public Task TestToFancyString_WhiteSpaceNewLine()
     {
         string fancyString = TestDict.ToFancyString(doWhiteSpaces:true, doNewLines:true);
+
+        return Verify(fancyString);
+    }
+
+    [Fact]
+    public Task TestToFancyString_Empty()
+    {
+        string fancyString = new Dictionary<object, object>().ToFancyString();
 
         return Verify(fancyString);
     }

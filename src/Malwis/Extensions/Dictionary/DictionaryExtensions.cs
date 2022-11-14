@@ -10,7 +10,6 @@ public static class DictionaryExtensions
 {
     private const string EmptyDictionary = "{}";
 
-    // TODO: write test
     /// <param name="source">The source dictionary. This will not be modified.</param>
     /// <param name="keysToRemove">The keys to remove</param>
     /// <typeparam name="TKey">The key type of the dictionary</typeparam>
@@ -126,7 +125,7 @@ public static class DictionaryExtensions
         return builder.ToString();
     }
 
-    // TODO: summary, test
+    // TODO: summary
     public static bool IsNullOrEmpty(this IDictionary? source) => DictionaryIsNullOrEmpty(source);
 
     // TODO: summary
@@ -137,7 +136,6 @@ public static class DictionaryExtensions
     // TODO: summary
     public static bool DictionaryIsNullOrEmpty<TKey, TValue>(IDictionary<TKey, TValue>? source) => source is null || source.Count == 0;
 
-    // TODO: test
     /// <summary>
     /// Gets the value using the <paramref name="key"/> or adds the key value pair if the key does not exist.
     /// </summary>
@@ -159,7 +157,6 @@ public static class DictionaryExtensions
         return value;
     }
 
-    // TODO: test
     /// <summary>
     /// Gets the value using the Key of <paramref name="keyValue"/> or adds the key value pair if the key does not exist.
     /// </summary>
@@ -170,7 +167,6 @@ public static class DictionaryExtensions
     /// <returns>A <typeparamref name="TValue"/> either by getting it from the dictionary or if nonexistent, adding it and returning the value of <paramref name="keyValue"/></returns>
     public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> source, KeyValuePair<TKey, TValue> keyValue) => GetOrAdd(source, keyValue.Key, keyValue.Value);
 
-    // TODO: test
     /// <summary>
     /// Gets the value using the <paramref name="key"/> or adds the key value pair if the key does not exist.
     /// If the <param name="valueCreator"/> will be Invoked to create the value if it does not exist.

@@ -1,3 +1,4 @@
 ﻿# VerifyXunitLib
 *.received.*
 *.received/
+*.verified.txt.bak
