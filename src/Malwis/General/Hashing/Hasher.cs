@@ -1,4 +1,4 @@
-﻿using Malwis.Extentions.Numbers;
+﻿using Malwis.Extensions.Numbers;
 
 namespace Malwis.General.Hashing;
 public static class Hasher

@@ -1,6 +1,4 @@
-﻿using Malwis.General.Numbers;
-
-namespace Malwis.Extentions.Numbers;
+﻿namespace Malwis.Extensions.Numbers;
 public static class NumberExtentions
 {
     public static bool IsNumeric(this object value) => General.Numbers.NumberHelper.IsNumeric(value);

@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Malwis.Extentions.Dictionary;
+
+using Malwis.Extensions.Dictionary;
 
 Dictionary<string, int> testDict = new()
     {
