@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Diagnostics.Contracts;
-using System.Net.Http.Headers;
-using System.Security;
 using System.Text;
 using Malwis.Extensions.Numbers;
 
