@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MalwisStandard2", "src\MalwisStandard2\MalwisStandard2.csproj", "{22B99345-56D5-4EA8-84E2-24E4527D71EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mukon", "src\Mukon\Mukon.csproj", "{1955F6B1-B756-4198-B6F1-4854E37E9E6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{22B99345-56D5-4EA8-84E2-24E4527D71EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22B99345-56D5-4EA8-84E2-24E4527D71EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22B99345-56D5-4EA8-84E2-24E4527D71EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1955F6B1-B756-4198-B6F1-4854E37E9E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1955F6B1-B756-4198-B6F1-4854E37E9E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1955F6B1-B756-4198-B6F1-4854E37E9E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1955F6B1-B756-4198-B6F1-4854E37E9E6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{75DEC78D-A14C-4323-BCF5-4CEFA543CBB2} = {71EE04A2-98E2-4CFE-B7DE-03A30E730394}
 		{FF2D9515-6768-4A4C-BA97-6F9639E43381} = {71EE04A2-98E2-4CFE-B7DE-03A30E730394}
 		{22B99345-56D5-4EA8-84E2-24E4527D71EF} = {12A5E9BA-DF9D-4EE4-84F7-3E51D5EB92CD}
+		{1955F6B1-B756-4198-B6F1-4854E37E9E6A} = {12A5E9BA-DF9D-4EE4-84F7-3E51D5EB92CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E752BB2D-5545-4F2B-BE59-7E18B73BD422}
